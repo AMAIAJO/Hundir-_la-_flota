@@ -9,8 +9,3 @@ tamaño_tablero = 10
 
 total_barcos = 20
 
-tablero_ordenador = crear_tablero()
-
-tablero_jugador = crear_tablero()
-
-tablero_mis_disparos = crear_tablero()

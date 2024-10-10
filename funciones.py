@@ -1,15 +1,20 @@
 from variables import*
 
-
-
 import pprint
 
 import random
 
 import copy
 
+import time
+
+import os
+
+
 
 def crear_tablero():   
+    global tamaño_tablero
+
     linea = []
     tablero = []
 
@@ -18,7 +23,6 @@ def crear_tablero():
     for i in range(tamaño_tablero):
         tablero.append(linea.copy())
     return tablero
-
 
 
 def mostrar_tablero(tablero):
@@ -30,10 +34,11 @@ def disparo(fila,columna,tablero):
     if tablero[fila][columna] == 'B':
         acertado = True
         tablero[fila][columna] = 'X'
-        print('Tocado')
+        #print('Tocado')
     else:
         tablero[fila][columna] = '~'
-        print('Agua')
+        os.system("cls")
+        #print('Agua')
 
     return acertado
 
@@ -54,12 +59,15 @@ def juega_computer(tablero_jugador):
     coordenada_columna = random.randint(0,9)
     tablero = tablero_jugador
 
+    print()
+    print("Turno ordenador:")
     resultado = disparo(coordenada_fila,coordenada_columna,tablero)
-
+    
     return resultado
 
 
 def posicion_correcta(tablero,fila, columna,tamaño,direccion):
+    global tamaño_tablero
 
     #Verificamos dirección arriba
     if direccion == "Arriba":
@@ -142,6 +150,12 @@ def actualizar_tablero_mis_disparos(tablero_ordenador):
                 tablero_mis_disparos[i][j] = "."
              
     return tablero_mis_disparos
+
+
+def actualizar_tablero_disparos_ordenador(tablero_jugador):
+    tablero_disparos_ordenador = copy.deepcopy(tablero_jugador) #Crear un copia profunda del tablero jugador
+
+    return tablero_disparos_ordenador
 
 
 def contar_barcos_hundidos(tablero): #¿Cuántas casillas de barcos se han alcanzado?
